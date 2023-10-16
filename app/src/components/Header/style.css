@@ -1,0 +1,7 @@
+.texto {
+    color: #6d6d6d;
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: rgb(0, 0, 0);
+}

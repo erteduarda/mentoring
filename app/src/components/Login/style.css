@@ -1,0 +1,64 @@
+.corpoLogin {
+    margin: auto;
+    box-shadow: 9px 10px 31px -14px #404040;
+    background-color: #fff;
+    height: 100%;
+    min-height: 600px;
+    max-width: 600px;
+    overflow: hidden;
+    padding: 50px 50px 50px;
+    text-align: center;
+}
+
+.posicao {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logoLogin {
+    padding-bottom: 40px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.logo {
+    width: 30%;
+}
+
+.estiloInput {
+    box-shadow: none !important;
+    border: none;
+    border-radius: 0px;
+}
+
+.formulario {
+    padding: 20px;
+    text-align: center;
+    display: grid;
+}
+
+.linhaFormulario {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.botao {
+    box-shadow: none !important;
+    border-radius: 0px;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.textoInfo {
+    color: rgb(112, 112, 112);
+    margin-top: 50px;
+}
+
+.textName {
+    color: #ffca2c;
+}
