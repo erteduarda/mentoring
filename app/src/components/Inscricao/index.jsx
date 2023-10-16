@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import Header from '../Header';
+import React, { useEffect, useState } from 'react'
+import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import Header from '../Header'
+import "./style.css"
+import { inscricaoCategoria } from '../../service/inscricaoService'
+import { useNavigate } from 'react-router-dom';
 
 function Inscricao() {
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [categoria, setCategoria] = useState('');
+    const navigate = useNavigate();
+    const [id, setId] = useState('')
+    const [categoria, setCategoria] = useState('')
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Aqui você pode fazer algo com os dados, como enviá-los para um servidor
-        console.log('Dados enviados:', { nome, email, categoria });
-        // Limpar os campos após o envio
-        setNome('');
-        setEmail('');
-        setCategoria('');
-    };
+    const dadosString = sessionStorage.getItem('usuario')
+    const dados = JSON.parse(dadosString)
+
+    useEffect(() => {
+        setId(dados[0].ID)
+    }, [])
+
+    const gravarInscricao = async () => {
+        const response = await inscricaoCategoria(id, categoria)
+        console.log(response)
+        navigate("/home");
+    }
 
     return (
         <section>
@@ -23,28 +29,28 @@ function Inscricao() {
             <Container>
                 <Row>
                     <Col>
-                        <Form onSubmit={handleSubmit}>
+                        <Form className="mt-5">
                             <Form.Group controlId="formNome">
-                                <Form.Label>Nome:</Form.Label>
-                                <Form.Control type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
+                                <Form.Label className="textoFormI">Nome</Form.Label>
+                                <Form.Control className="inputFormI" type="text" value={dados[0].Nome} readOnly={true} />
                             </Form.Group>
 
                             <Form.Group controlId="formEmail">
-                                <Form.Label>Email:</Form.Label>
-                                <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                <Form.Label className="textoFormI">Email</Form.Label>
+                                <Form.Control className="inputFormI" type="email" value={dados[0].Email} readOnly={true} />
                             </Form.Group>
 
                             <Form.Group controlId="formCategoria">
-                                <Form.Label>Categoria:</Form.Label>
-                                <Form.Select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
+                                <Form.Label className="textoFormI">Categoria</Form.Label>
+                                <Form.Select className="inputFormI" value={categoria} onChange={(e) => setCategoria(e.target.value)}>
                                     <option>Selecione...</option>
-                                    <option value="categoria1">Mentor</option>
-                                    <option value="categoria2">Mentorado</option>
+                                    <option value="Mentor">Mentor</option>
+                                    <option value="Mentorado">Mentorado</option>
                                     {/* Adicione mais opções conforme necessário */}
                                 </Form.Select>
                             </Form.Group>
 
-                            <Button variant="primary" type="submit">
+                            <Button variant="primary" className="mt-3" onClick={gravarInscricao}>
                                 Inscrever-se
                             </Button>
                         </Form>
