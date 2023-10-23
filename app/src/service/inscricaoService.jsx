@@ -12,7 +12,7 @@ async function inscricaoCategoria(id, categoria) {
 
 async function listarInscricoes(id, categoria) {
     try {
-        const response = await axios.get(`http://localhost:8001/inscricao`)
+        const response = await axios.get(`http://localhost:8001/inscricao/aprovados`)
         return response.data
     } catch (error) {
         console.error('Erro na requisição:', error)

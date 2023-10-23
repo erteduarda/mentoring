@@ -31,25 +31,26 @@ function GerenciarInscricao() {
     }
 
     const handleRelacaoChange = (mentorID, mentoradoID) => {
-        // Adiciona ou remove a relação com base na seleção
-        const novaRelacao = relacoes.find(relacao => relacao.mentorID === mentorID);
-        if (novaRelacao) {
-            // Remove a relação
-            setRelacoes(relacoes.filter(relacao => relacao.mentorID !== mentorID));
-        } else {
-            // Adiciona a relação
-            setRelacoes([...relacoes, { mentorID, mentoradoID }]);
-        }
+        // Verifica se a relação já existe
+        const existeRelacao = relacoes.some(relacao => relacao.mentorID === mentorID)
+        // Atualiza o estado com base na existência da relação
+        setRelacoes(prevRelacoes => {
+            if (existeRelacao) {
+                // Se a relação já existe, atualize-a
+                return prevRelacoes.map(relacao =>
+                    relacao.mentorID === mentorID ? { ...relacao, mentoradoID } : relacao
+                )
+            } else {
+                // Se a relação não existe, adicione-a
+                return [...prevRelacoes, { mentorID, mentoradoID }]
+            }
+        })
     }
 
     async function salvar() {
         console.log(relacoes)
         const response = await salvarRelacao(relacoes)
-        console.log(response)
-        // navigate("/home");
     }
-
-    
 
     return (
         <section>
