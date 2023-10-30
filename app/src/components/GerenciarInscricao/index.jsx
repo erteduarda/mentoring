@@ -12,22 +12,27 @@ import Button from 'react-bootstrap/Button';
 import './style.css'
 //importação de icones
 //APIs
-import { listarInscricoes, salvarRelacao } from "../../service/inscricaoService"
+import { listarInscricoes, salvarRelacao, listarInscricoesNap, aprovarUsuario } from "../../service/inscricaoService"
 //importação de componentes
 import Header from "../Header/index.jsx"
 
 function GerenciarInscricao() {
     const navigate = useNavigate();
     const [lista, setLista] = useState([])
+    const [listaNap, setListaNap] = useState([])
     const [relacoes, setRelacoes] = useState([])
+    const [atualizar, setAtualizar] = useState(true)
 
     useEffect(() => {
         listar()
-    }, []);
+    }, [atualizar]);
 
     const listar = async () => {
         const response = await listarInscricoes()
+        const responseNap = await listarInscricoesNap()
         setLista(response)
+        setListaNap(responseNap)
+        console.log(response)
     }
 
     const handleRelacaoChange = (mentorID, mentoradoID) => {
@@ -48,8 +53,34 @@ function GerenciarInscricao() {
     }
 
     async function salvar() {
-        console.log(relacoes)
         const response = await salvarRelacao(relacoes)
+        if (response.success) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Relação inserida.',
+                showConfirmButton: false,
+                timer: 1500
+            }).then((result) => {
+                navigate("/home")
+            })
+        }
+    }
+
+    async function aprovar(id) {
+        const response = await aprovarUsuario(id)
+        console.log(response)
+        if (response.protocol41) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Inscrição aprovada.',
+                showConfirmButton: false,
+                timer: 1500
+            }).then((result) => {
+                setAtualizar(!atualizar)
+            })
+        }
     }
 
     return (
@@ -100,6 +131,33 @@ function GerenciarInscricao() {
                     <Button variant="primary" className="mt-3 mb-5" onClick={salvar}>
                         Gravar
                     </Button>
+                </Form>
+                <Form>
+                    <Row className="mt-5">
+                        <Col>
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>Incrito</th>
+                                        <th>Papel</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {listaNap.map((item, index) => (
+                                        <tr key={index}>
+                                            <td>{item.Nome}</td>
+                                            <td>{item.Papel}</td>
+                                            <td>
+                                                <Button variant="success" onClick={() => aprovar(item.UsuarioID)}>Aprovar</Button>
+                                            </td>
+                                        </tr>
+                                    )
+                                    )}
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
                 </Form>
             </Container>
         </section >
