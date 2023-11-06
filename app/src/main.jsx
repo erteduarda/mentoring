@@ -12,6 +12,10 @@ import Sessao from './components/Sessao';
 import SessaoEspecifica from './components/SessaoEspecifica';
 import Administrador from './components/Administrador';
 import GerenciarInscricao from './components/GerenciarInscricao';
+import Chat from './components/Chat/index.jsx';
+import Politica from './components/Politica/index.jsx';
+import Manual from './components/Manual/index.jsx';
+import Material from './components/Material/index.jsx';
 
 const root = createRoot(document.getElementById('root'));
 root.render(
@@ -26,6 +30,10 @@ root.render(
       <Route path="/sessaoespecifica/:id" element={<SessaoEspecifica />} />
       <Route path="/administrador" element={<Administrador />} />
       <Route path="/acompanharinscricao" element={<GerenciarInscricao />} />
+      <Route path="/chat" element={<Chat />} />
+      <Route path="/politicas" element={<Politica />} />
+      <Route path="/manual" element={<Manual />} />
+      <Route path="/material" element={<Material />} />
     </Routes>
   </Router>
 );

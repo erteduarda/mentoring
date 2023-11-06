@@ -4,9 +4,9 @@ import Header from '../Header'
 import "./style.css"
 
 function Agenda() {
-    const [nome, setNome] = useState('')
-    const [email, setEmail] = useState('')
-    const [categoria, setCategoria] = useState('')
+    const [data, setData] = useState('')
+    const [hora, setHora] = useState('')
+    const [sessao, setSessao] = useState('')
 
     const dadosString = sessionStorage.getItem('usuario')
     const dados = JSON.parse(dadosString)
@@ -31,8 +31,8 @@ function Agenda() {
                     <Col>
                         <Form className="mt-5" onSubmit={handleSubmit}>
                             <Form.Group controlId="formCategoria">
-                                <Form.Label className="textoFormA">Categoria</Form.Label>
-                                <Form.Select className="inputFormA" value={categoria} onChange={(e) => setCategoria(e.target.value)}>
+                                <Form.Label className="textoFormA">Sessão</Form.Label>
+                                <Form.Select className="inputFormA" value={sessao} onChange={(e) => setSessao(e.target.value)}>
                                     <option>Selecione...</option>
                                     {array.map((item, index) => (
                                         <option value="Mentor">Sessão {item}</option>
@@ -45,13 +45,13 @@ function Agenda() {
                                 <Col>
                                     <Form.Group controlId="formNome">
                                         <Form.Label className="textoFormA">Data</Form.Label>
-                                        <Form.Control className="inputFormA" type="date" value={dados[0].Nome} readOnly={true} />
+                                        <Form.Control className="inputFormA" type="date" readOnly={false} />
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group controlId="formNome">
                                         <Form.Label className="textoFormA">Hora</Form.Label>
-                                        <Form.Control className="inputFormA" type="time" value={dados[0].Nome} readOnly={true} />
+                                        <Form.Control className="inputFormA" type="time" readOnly={false} />
                                     </Form.Group>
                                 </Col>
                             </Row>

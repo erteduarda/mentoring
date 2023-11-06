@@ -28,6 +28,7 @@ function Header() {
                         <Nav.Link href="/manual" className="texto">Manual</Nav.Link>
                         <Nav.Link href="/material" className="texto">Material</Nav.Link>
                         <Nav.Link href="/politicas" className="texto">Políticas</Nav.Link>
+                        <Nav.Link href="/chat" className="texto">Chat</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
