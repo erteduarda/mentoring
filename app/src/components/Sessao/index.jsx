@@ -11,8 +11,6 @@ import './style.css'
 import Header from "../Header/index.jsx"
 import Cards from "../Cards/index.jsx"
 
-
-
 function Sessao() {
 
     return (
