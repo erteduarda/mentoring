@@ -16,6 +16,7 @@ import Chat from './components/Chat/index.jsx';
 import Politica from './components/Politica/index.jsx';
 import Manual from './components/Manual/index.jsx';
 import Material from './components/Material/index.jsx';
+import Relatorio from './components/Relatorio/index.jsx';
 
 const root = createRoot(document.getElementById('root'));
 root.render(
@@ -34,6 +35,7 @@ root.render(
       <Route path="/politicas" element={<Politica />} />
       <Route path="/manual" element={<Manual />} />
       <Route path="/material" element={<Material />} />
+      <Route path="/relatorio" element={<Relatorio />} />
     </Routes>
   </Router>
 );
