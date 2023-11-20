@@ -36,15 +36,25 @@ function Agenda() {
         console.log('Dados enviados:', { data, sessao, hora, dados, local })
 
         const response = await agenda(data, sessao, hora, dados, local)
-
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Agenda Gravada.",
-            showConfirmButton: false,
-            timer: 1500
-        })
-
+        console.log(response)
+        if(response === 'Sessão já existe.') {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Sessão já existe.",
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Agenda Gravada.",
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+        
         const responseBusca = await buscarAgenda(dados[0].relacionamentoID);
         setAgendas(responseBusca);
     }
