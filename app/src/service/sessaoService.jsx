@@ -22,8 +22,20 @@ async function relatoMentoradoService(relato, id, sessao) {
 }
 
 
+async function gravaImagem(imagem, id, sessao) {
+    try {
+        const response = await axios.post(`http://localhost:8001/sessao/imagem`, { imagem, id, sessao });
+        return response.data;
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+        throw error;
+    }
+}
+
+
 
 export {
     relatoMentorService,
-    relatoMentoradoService
+    relatoMentoradoService,
+    gravaImagem
 }

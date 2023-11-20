@@ -59,7 +59,7 @@ function Login() {
                         <div className="logoLogin">
                             <img src="/src/assets/image/logoMentoring.png" className="logo" />
                         </div>
-                        <Form className="formulario">
+                        <Form className="formulario" onSubmit={handleLogin}>
                             <Form.Group className="mb-3 linhaFormulario" controlId="email">
                                 <FaUserAlt />
                                 <Form.Control type="email" placeholder="E-mail" className="estiloInput" onChange={(event) => setEmail(event.target.value)} autoComplete="off" />
@@ -68,7 +68,7 @@ function Login() {
                                 <FaLock />
                                 <Form.Control type="password" placeholder="Senha" className="estiloInput" onChange={(event) => setSenha(event.target.value)} />
                             </Form.Group>
-                            <Button variant="warning" className="botao" onClick={(event) => handleLogin(event)}>Entrar</Button>{' '}
+                            <Button variant="warning" className="botao" type="submit">Entrar</Button>
                         </Form>
                         <a href="/cadastro">Cadastre-se aqui</a>
                         <Alert variant="danger" show={open}>
